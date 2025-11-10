@@ -1,15 +1,18 @@
 import * as React from "react";
 import { Input } from "../ui/input";
-import { CircleDollarSign, Search, Users } from "lucide-react";
+import { CalendarDays, CircleDollarSign, Search, Users } from "lucide-react";
 import { Button } from "../ui/button";
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "../ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
+import { Label } from "@radix-ui/react-label";
+import { Popover, PopoverContent, PopoverTrigger } from "@radix-ui/react-popover";
+import { Calendar } from "../ui/calendar";
+import DateRangePicker from "../dateTimePicker/DateRangePicker";
+
 
 function HeroSection() {
   const plugin = React.useRef(
@@ -21,6 +24,9 @@ function HeroSection() {
     "/assets/banner/beach3.jpg",
     "/assets/banner/beach4.jpg",
   ]);
+
+  const [dateStart, setDateStart] = React.useState();
+  const [dateEnd, setDateEnd] = React.useState();
   return (
     <div className="relative w-full h-[400px]">
       <Carousel
@@ -48,18 +54,18 @@ function HeroSection() {
             Du lịch thả ga, Không lo về giá
           </h2>
 
-          <div className="flex flex-col items-center justify-between gap-3">
-            <div className="flex w-full justify-between gap-3">
+          <div className="flex flex-col items-center justify-between gap-3 ">
+            <div className="flex w-full justify-between gap-3 ">
               {/* Ô nhập địa điểm */}
-              <div className="flex-2  bg-gray-100 rounded-lg px-3 py-2">
+              <div className="flex-2 gap-2 bg-gray-100 rounded-lg  px-3 py-2">
                 <Input
                   placeholder="Nhập địa chỉ bạn muốn đến"
-                  className="border-none bg-transparent focus-visible:ring-0 text-center"
+                  className="border-none bg-transparent focus-visible:ring-0 text-center "
                 />
               </div>
-
+              <div className="h-10"></div>
               {/* Ô chọn giá */}
-              <div className="flex flex-1 justify-center items-center gap-2 bg-gray-100 rounded-lg px-3 py-2">
+              <div className="flex flex-1 justify-center items-center gap-2 bg-gray-100 rounded-lg px-3 py-2 ">
                 <CircleDollarSign />
                 <span className="text-sm text-gray-700">1 triệu trở lên</span>
               </div>
@@ -68,9 +74,18 @@ function HeroSection() {
             <div className="flex w-full gap-3 justify-between ">
               {/* Ô ngày */}
               <div className="flex-2  gap-2 bg-gray-100 rounded-lg w-full px-3 py-2">
-                <div className="text-sm text-gray-700 ">
-                  <p>07/09/2025 – 09/09/2025</p>
-                  <p className="text-xs text-gray-400">Chủ Nhật - Thứ Ba</p>
+                <div className="text-sm text-gray-700 flex items-center gap-2">
+                  <DateRangePicker
+                    label={"Chọn ngày đi"}
+                    value={dateStart}
+                    onChange={setDateStart}
+                  />
+                  <div className="w-px h-10 bg-gray-300 mx-2"></div>
+                  <DateRangePicker
+                    label={"Chọn ngày về"}
+                    value={dateEnd}
+                    onChange={setDateEnd}
+                  />
                 </div>
               </div>
               {/* Ô số người */}
@@ -83,7 +98,7 @@ function HeroSection() {
               </div>
             </div>
           </div>
-          <div className=" absolute left-1/2 ">
+          <div className=" absolute left-1/2 transform -translate-x-1/2   ">
             {/* Nút tìm kiếm */}
             <Button className="mt-5 bg-[#22d6ff] hover:bg-[#1cc2e6] text-white rounded-3xl px-20 py-7">
               <Search className="mr-2 h-4 w-4" /> Tìm Kiếm
