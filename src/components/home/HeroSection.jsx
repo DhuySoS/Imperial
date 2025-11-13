@@ -12,6 +12,7 @@ import { Label } from "@radix-ui/react-label";
 import { Popover, PopoverContent, PopoverTrigger } from "@radix-ui/react-popover";
 import { Calendar } from "../ui/calendar";
 import DateRangePicker from "../dateTimePicker/DateRangePicker";
+import { useEffect } from "react";
 
 
 function HeroSection() {
