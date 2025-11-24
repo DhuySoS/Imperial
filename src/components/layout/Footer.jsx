@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 function Footer() {
   return (
@@ -45,6 +45,26 @@ function Footer() {
         <div>
           <h3 className="font-bold mb-3 text-gray-900">Hình thức thanh toán</h3>
           <div className="flex flex-wrap items-center gap-3">
+            <img
+              src="/assets/Footer/LogoTPBank.svg"
+              alt="tpBank"
+              className="h-12 w-12 object-cover"
+            />
+            <img
+              src="/assets/Footer/logo_Momo.png"
+              alt="momo"
+              className="h-12 w-12 object-cover"
+            />
+            <img
+              src="/assets/Footer/VIB_logo.png"
+              alt="momo"
+              className="h-12 w-12 object-cover"
+            />
+            <img
+              src="/assets/Footer/Vietcombank.png"
+              alt="momo"
+              className="h-12 w-12 object-cover"
+            />
           </div>
         </div>
       </div>
@@ -65,4 +85,4 @@ function Footer() {
   );
 }
 
-export default Footer
+export default Footer;

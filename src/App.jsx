@@ -12,6 +12,7 @@ import NotFound from "./pages/NotFound";
 import AuthLayout from "./components/layout/AuthLayout";
 import LoginForm from "./components/auth/LoginForm";
 import RegisterForm from "./components/auth/RegisterForm";
+import Profile from "./components/profile/Profile";
 
 function App() {
   const router = createBrowserRouter([
@@ -22,6 +23,10 @@ function App() {
         {
           index: true,
           element: <HomePage />,
+        },
+        {
+          path: "/profile",
+          element: <Profile />,
         },
       ],
     },

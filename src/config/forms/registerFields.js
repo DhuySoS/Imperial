@@ -5,7 +5,7 @@ export const registerFields = [
     type: "text",
     autoComplete: "username",
   },
-  { id: "phone", label: "Số điện thoại", type: "tel", autoComplete: "tel" },
+  // { id: "phone", label: "Số điện thoại", type: "tel", autoComplete: "tel" },
   { id: "email", label: "Email", type: "email", autoComplete: "email" },
   {
     id: "password",

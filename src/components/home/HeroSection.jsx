@@ -74,7 +74,7 @@ function HeroSection() {
 
             <div className="flex w-full gap-3 justify-between ">
               {/* Ô ngày */}
-              <div className="flex-2  gap-2 bg-gray-100 rounded-lg w-full px-3 py-2">
+              <div className="flex-2  gap-2 bg-gray-100 rounded-lg w-full px-3 py-2 relative z-50">
                 <div className="text-sm text-gray-700 flex items-center gap-2">
                   <DateRangePicker
                     label={"Chọn ngày đi"}

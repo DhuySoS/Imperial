@@ -31,66 +31,67 @@ export default function RegisterForm() {
   });
 
   return (
-    <div className="w-1/2  mx-auto p-8 border rounded-2xl shadow-lg space-y-6">
-      <h2 className="text-center font-semibold text-2xl">
-        Đăng ký ngay, ưu đãi trao tay
-      </h2>
-      <form onSubmit={handleSubmit()} className="w-full space-y-5 text-center">
-        {/* Tên tài khoản */}
-        <CustomInput
-          id="accountName"
-          type="text"
-          label="Tên tài khoản"
-          {...register("accountName")}
-          error={errors.accountName?.message}
+    <div className="flex border rounded-2xl shadow-lg ">
+      <div className="w-1/2 hidden md:block h-full ">
+        <img
+          src="/assets/LogoLog_in/register.jpg"
+          alt="Logo"
+          className="h-full object-cover rounded-l-2xl  "
         />
+      </div>
+      <div className="w-1/2 h-full">
+        <div className="mx-12 mt-12 flex flex-col justify-center h-full">
+          <div className="space-y-2 mb-4">
+            <h2 className=" font-bold text-2xl">Đăng ký liền tay</h2>
+            <span className="text-gray-400">Nhận ngay ưu đãi</span>
+          </div>
+          <form onSubmit={handleSubmit()} className=" space-y-5 text-center">
+            {/* Họ và Tên - 2 ô ngang */}
+            <div className="grid grid-cols-2 gap-3">
+              {nameFields.map((field) => (
+                <CustomInput
+                  key={field.id}
+                  id={field.id}
+                  type={field.type}
+                  label={field.label}
+                  autoComplete={field.autoComplete}
+                  {...register(field.id)}
+                  error={errors[field.id]?.message}
+                />
+              ))}
+            </div>
 
-        {/* Họ và Tên - 2 ô ngang */}
-        <div className="grid grid-cols-2 gap-3">
-          {nameFields.map((field) => (
-            <CustomInput
-              key={field.id}
-              id={field.id}
-              type={field.type}
-              label={field.label}
-              autoComplete={field.autoComplete}
-              {...register(field.id)}
-              error={errors[field.id]?.message}
-            />
-          ))}
+            {/* Các field còn lại */}
+            {registerFields.map((field) => (
+              <CustomInput
+                key={field.id}
+                id={field.id}
+                type={field.type}
+                label={field.label}
+                autoComplete={field.autoComplete}
+                {...register(field.id)}
+                error={errors[field.id]?.message}
+              />
+            ))}
+
+            <Button
+              type="submit"
+              disabled={isSubmitting}
+              size="custom"
+              className=" bg-linear-to-r from-cyan-500 to-blue-500 font-semibold text-xl py-3  rounded-full hover:shadow-lg transition disabled:opacity-70"
+            >
+              {isSubmitting ? "Đang xử lý..." : "Đăng ký"}
+            </Button>
+          </form>
+
+          {/* Link đăng nhập */}
+          <p className="text-center mt-6 text-sm text-sky-500 font-medium">
+            <Link to="/auth/login" className="hover:underline">
+              Tôi đã có tài khoản
+            </Link>
+          </p>
         </div>
-
-        {/* Các field còn lại */}
-        {registerFields
-          .filter((f) => f.id != "accountName")
-          .map((field) => (
-            <CustomInput
-              key={field.id}
-              id={field.id}
-              type={field.type}
-              label={field.label}
-              autoComplete={field.autoComplete}
-              {...register(field.id)}
-              error={errors[field.id]?.message}
-            />
-          ))}
-
-        <Button
-          type="submit"
-          disabled={isSubmitting}
-          size="lg"
-          className=" bg-linear-to-r from-cyan-500 to-blue-500 text-white font-medium  rounded-full hover:shadow-lg transition disabled:opacity-70"
-        >
-          {isSubmitting ? "Đang xử lý..." : "Đăng ký"}
-        </Button>
-      </form>
-
-      {/* Link đăng nhập */}
-      <p className="text-center mt-6 text-sm text-sky-500 font-medium">
-        <Link to="/auth/login" className="hover:underline">
-          Tôi đã có tài khoản
-        </Link>
-      </p>
+      </div>
     </div>
   );
 }
