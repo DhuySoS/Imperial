@@ -6,8 +6,8 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@radix-ui/react-popover";
-import { Calendar } from "../ui/calendar";
-import { Button } from '../ui/button';
+import { Button } from '@/components/ui/button';
+import { Calendar } from '@/components/ui/calendar';
 
 export default function DateRangePicker({label, value, onChange}) {
     const [open, setOpen] = React.useState(false);

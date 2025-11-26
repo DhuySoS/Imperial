@@ -1,9 +1,6 @@
 import {
-  BrowserRouter,
   createBrowserRouter,
-  Route,
   RouterProvider,
-  Routes,
 } from "react-router";
 import { Toaster, toast } from "sonner";
 import HomePage from "./pages/HomePage";
@@ -13,6 +10,12 @@ import AuthLayout from "./components/layout/AuthLayout";
 import LoginForm from "./components/auth/LoginForm";
 import RegisterForm from "./components/auth/RegisterForm";
 import Profile from "./components/profile/Profile";
+import OrderDetail from "./components/order/OrderDetail";
+import ProductDetail from "./components/products/ProductDetail";
+import SearchResults from "./pages/SearchResults";
+import MyVouchers from "./pages/MyVouchers";
+import Favorites from "./pages/Favorites";
+import PaymentPage from "./pages/PaymentPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -27,6 +30,30 @@ function App() {
         {
           path: "/profile",
           element: <Profile />,
+        },
+        {
+          path: "/order_detail",
+          element: <OrderDetail />,
+        },
+        {
+          path: "/room_detail",
+          element: <ProductDetail />,
+        },
+        {
+          path: "/search",
+          element: <SearchResults />,
+        },
+        {
+          path: "/my-vouchers",
+          element: <MyVouchers />,
+        },
+        {
+          path: "/favorites",
+          element: <Favorites />,
+        },
+        {
+          path: "/payment",
+          element: <PaymentPage />,
         },
       ],
     },

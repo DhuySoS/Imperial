@@ -2,10 +2,10 @@ import React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import CustomInput from "../custome/InputCustome";
 import { nameFields, registerFields } from "@/config/forms/registerFields";
 import { Button } from "../ui/button";
 import { Link } from "react-router-dom";
+import InputCustome from "@/common/InputCustome";
 const schema = z
   .object({
     accountName: z.string().min(3, "Tên tài khoản ít nhất 3 ký tự"),
@@ -45,11 +45,11 @@ export default function RegisterForm() {
             <h2 className=" font-bold text-2xl">Đăng ký liền tay</h2>
             <span className="text-gray-400">Nhận ngay ưu đãi</span>
           </div>
-          <form onSubmit={handleSubmit()} className=" space-y-5 text-center">
+          <form onSubmit={handleSubmit()} className=" space-y-8 text-center">
             {/* Họ và Tên - 2 ô ngang */}
             <div className="grid grid-cols-2 gap-3">
               {nameFields.map((field) => (
-                <CustomInput
+                <InputCustome
                   key={field.id}
                   id={field.id}
                   type={field.type}
@@ -63,7 +63,7 @@ export default function RegisterForm() {
 
             {/* Các field còn lại */}
             {registerFields.map((field) => (
-              <CustomInput
+              <InputCustome
                 key={field.id}
                 id={field.id}
                 type={field.type}

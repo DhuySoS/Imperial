@@ -8,11 +8,9 @@ import {
   CarouselItem,
 } from "../ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
-import { Label } from "@radix-ui/react-label";
-import { Popover, PopoverContent, PopoverTrigger } from "@radix-ui/react-popover";
-import { Calendar } from "../ui/calendar";
-import DateRangePicker from "../dateTimePicker/DateRangePicker";
-import { useEffect } from "react";
+import DateRangePicker from "@/common/DateRangePicker";
+import { Link } from "react-router-dom";
+
 
 
 function HeroSection() {
@@ -102,7 +100,12 @@ function HeroSection() {
           <div className=" absolute left-1/2 transform -translate-x-1/2   ">
             {/* Nút tìm kiếm */}
             <Button className="mt-5 bg-[#22d6ff] hover:bg-[#1cc2e6] text-white rounded-3xl px-20 py-7">
-              <Search className="mr-2 h-4 w-4" /> Tìm Kiếm
+              <Link
+                to="/search"
+                className="flex items-center justify-center gap-2"
+              >
+                <Search className="mr-2 h-4 w-4" /> Tìm Kiếm
+              </Link>
             </Button>
           </div>
         </div>

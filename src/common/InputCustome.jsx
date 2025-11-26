@@ -1,6 +1,6 @@
 import React from "react";
 import { Eye, EyeOff } from "lucide-react";
-import { Input } from "../ui/input";
+import { Input } from "@/components/ui/input";
 
 const InputCustome = ({
   id,
@@ -16,13 +16,13 @@ const InputCustome = ({
   const inputType = isPassword && showPassword ? "text" : type;
 
   return (
-    <div className="relative">
+    <div className="relative w-full">
       <Input
         id={id}
         type={inputType}
         placeholder={placeholder}
         {...props}
-        className={`peer w-full mb-4 h-12 px-4 outline-none ${className}`}
+        className={`peer w-full  h-12 px-4 outline-none ${className}`}
       />
       <label
         htmlFor={id}
@@ -46,7 +46,7 @@ const InputCustome = ({
         </span>
       )}
       {error && (
-        <p className="text-red-500 text-xs ml-1 absolute -bottom-1 left-2">
+        <p className="text-red-500 text-xs ml-1  absolute -bottom-5 left-2">
           {error}
         </p>
       )}

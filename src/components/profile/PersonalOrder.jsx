@@ -1,8 +1,5 @@
-import { id } from "date-fns/locale/id";
-import { ro } from "date-fns/locale/ro";
-import { check } from "zod";
 import OrderAccordingItem from "./OrderAccordingItem";
-import BookingCard from "./BookingCard";
+import BookingCard from "../card/BookingCard";
 import { useState } from "react";
 
 const PersonalOrder = () => {

@@ -1,11 +1,8 @@
-import React, { useState } from "react";
-import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import { Eye, EyeOff } from "lucide-react";
-import InputCustome from "../custome/InputCustome";
 import { Link, useNavigate } from "react-router-dom";
 import OtherLogin from "./otherLogin";
 import { useAuth } from "@/context/AuthContext";
+import InputCustome from "@/common/InputCustome";
 
 function LoginForm() {
   const {login } = useAuth();
@@ -20,7 +17,7 @@ function LoginForm() {
   return (
     <div className="w-1/2  mx-auto p-8 border rounded-2xl shadow-lg space-y-6">
       <h2 className="text-center font-bold text-3xl">Đăng nhập</h2>
-      <form className="w-full text-center space-y-4">
+      <form className="w-full text-center space-y-8">
         <InputCustome
           id="username"
           type="text"

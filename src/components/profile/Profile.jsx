@@ -1,6 +1,9 @@
 import React from "react";
 import PersonalInfor from "./PersonalInfor";
 import PersonalOrder from "./PersonalOrder";
+import PersionalAchieve from "./PersionalAchieve";
+import PersonalSetting from "./PersonalSetting";
+import PersonalComment from "./PersonalComment";
 
 function Profile() {
   const [tabActive, setTabActive] = React.useState("infor");
@@ -33,7 +36,8 @@ function Profile() {
         </button>
         <button
           className={`p-4 rounded-lg hover:bg-gray-200  transition-all   ${
-            tabActive === "order" ? "bg-gray-200 text-blue-400"
+            tabActive === "order"
+              ? "bg-gray-200 text-blue-400"
               : "text-gray-400"
           } `}
           onClick={() => setTabActive("order")}
@@ -53,7 +57,8 @@ function Profile() {
         </button>
         <button
           className={`p-4 rounded-lg hover:bg-gray-200  transition-all   ${
-            tabActive === "achieve" ? "bg-gray-200 text-blue-400"
+            tabActive === "achieve"
+              ? "bg-gray-200 text-blue-400"
               : "text-gray-400"
           } `}
           onClick={() => setTabActive("achieve")}
@@ -78,8 +83,7 @@ function Profile() {
         </button>
         <button
           className={`p-4 rounded-lg hover:bg-gray-200  transition-all   ${
-            tabActive === "chat" ? "bg-gray-200 text-blue-400"
-              : "text-gray-400"
+            tabActive === "chat" ? "bg-gray-200 text-blue-400" : "text-gray-400"
           } `}
           onClick={() => setTabActive("chat")}
         >
@@ -101,7 +105,8 @@ function Profile() {
         </button>
         <button
           className={`p-4 rounded-lg hover:bg-gray-200  transition-all   ${
-            tabActive === "setting" ? "bg-gray-200 text-blue-400"
+            tabActive === "setting"
+              ? "bg-gray-200 text-blue-400"
               : "text-gray-400"
           } `}
           onClick={() => setTabActive("setting")}
@@ -119,12 +124,12 @@ function Profile() {
           </svg>
         </button>
       </div>
-      <div className="flex-1">
-        {tabActive === "infor" && <PersonalInfor/>}
-        {tabActive === "order" && <PersonalOrder/>}
-        {tabActive === "achieve" && <div>Thành tích</div>}
-        {tabActive === "chat" && <div>Hộp thoại</div>}
-        {tabActive === "setting" && <div>Cài đặt</div>}
+      <div className="flex-1 overflow-hidden animate-in slide-in-from-right-10 fade-in duration-300 ease-in-out" key={tabActive}>
+        {tabActive === "infor" && <PersonalInfor />}
+        {tabActive === "order" && <PersonalOrder />}
+        {tabActive === "achieve" && <PersionalAchieve />}
+        {tabActive === "chat" && <PersonalComment/>}
+        {tabActive === "setting" && <PersonalSetting/>}
       </div>
     </div>
   );
