@@ -1,11 +1,10 @@
 import React from "react";
 import { Copy, Ticket } from "lucide-react";
-import { toast } from "sonner";
 
 const VoucherCard = ({ voucher }) => {
   const handleCopy = () => {
     navigator.clipboard.writeText(voucher.code);
-    toast.success(`Đã sao chép mã: ${voucher.code}`);
+    alert(`Đã sao chép mã: ${voucher.code}`);
   };
 
   return (
@@ -14,9 +13,9 @@ const VoucherCard = ({ voucher }) => {
         <Ticket size={40} />
       </div>
       <div className="p-4 flex-1">
-        <p className="font-bold text-gray-800">{voucher.title}</p>
+        <p className="font-bold text-gray-800">{voucher.description}</p>
         <p className="text-sm text-gray-500 mt-1">
-          Hết hạn: {voucher.expiry}
+          Hết hạn: {voucher.endDate}
         </p>
       </div>
       <div className="p-4 border-l border-dashed flex flex-col items-center justify-center gap-2">

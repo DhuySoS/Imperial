@@ -1,15 +1,46 @@
 import { Star, X } from "lucide-react";
 import React, { useState } from "react";
 import BookingCard from "../card/BookingCard";
+import api from "@/services/api";
+import { useAuth } from "@/context/AuthContext";
 
 const CommentModal = ({ room, onClose }) => {
   if (!room) return null;
+  console.log("Comment Modal Room", room);
+  
+  const { user } = useAuth();
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
+  const [comment, setComment] = useState("");
+
+  const handleSubmit = async () => {
+    if (rating === 0) {
+      alert("Vui lòng chọn số sao đánh giá!");
+      return;
+    }
+
+    const payload = {
+      guestId: user?.id,
+      hotelId: room.hotelId,
+      rating: rating,
+      comment: comment,
+      reviewDate: new Date().toISOString().split("T")[0],
+    };
+
+    try {
+      await api.post("/reviews", payload);
+      alert("Cảm ơn bạn đã đánh giá!");
+      onClose();
+    } catch (error) {
+      console.error("Lỗi khi gửi đánh giá:", error);
+      alert("Gửi đánh giá thất bại, vui lòng thử lại.");
+    }
+  };
+
   return (
     <div className=" fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm transition-opacity">
       <div
-        className="bg-gray-100  rounded-2xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200"
+        className="bg-gray-100 w-1/3 rounded-2xl shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -52,9 +83,14 @@ const CommentModal = ({ room, onClose }) => {
           </div>
           <BookingCard item={room} />
           <div className="border bg-white p-4 rounded-xl shadow-sm">
-            <textarea className="w-full  resize-none outline-none text-gray-700 placeholder:text-gray-400 text-lg leading-relaxed bg-transparent" placeholder="Hãy viết đánh giá..."/>
+            <textarea
+              className="w-full  resize-none outline-none text-gray-700 placeholder:text-gray-400 text-lg leading-relaxed bg-transparent"
+              placeholder="Hãy viết đánh giá..."
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+            />
           </div>
-          <button className="w-full bg-green-600 hover:bg-green-500 text-white font-bold text-lg py-3.5 rounded-xl shadow-lg shadow-green-200 transition-all active:scale-[0.98]">
+          <button onClick={handleSubmit} className="w-full bg-green-600 hover:bg-green-500 text-white font-bold text-lg py-3.5 rounded-xl shadow-lg shadow-green-200 transition-all active:scale-[0.98]">
             Gửi đánh giá
           </button>
         </div>

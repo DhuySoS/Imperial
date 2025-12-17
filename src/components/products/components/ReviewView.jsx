@@ -1,48 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Star } from "lucide-react";
-
-const fakeReviews = [
-  {
-    id: 1,
-    name: "Nguyễn Văn A",
-    avatar: "/assets/avatar.jpg",
-    rating: 5,
-    content:
-      "Khách sạn tuyệt vời! Dịch vụ tốt, phòng ốc sạch sẽ và nhân viên thân thiện. Tôi chắc chắn sẽ quay lại.",
-  },
-  {
-    id: 2,
-    name: "Trần Thị B",
-    avatar: "/assets/avatar.jpg",
-    rating: 4,
-    content:
-      "Vị trí thuận lợi, gần trung tâm. Phòng có view đẹp nhưng cách âm chưa được tốt lắm. Nhìn chung là một trải nghiệm tốt.",
-  },
-  {
-    id: 3,
-    name: "Lê Văn C",
-    avatar: "/assets/avatar.jpg",
-    rating: 5,
-    content:
-      "Mọi thứ đều hoàn hảo, từ không gian, tiện nghi cho đến thái độ phục vụ của nhân viên. Rất đáng tiền!",
-  },
-  {
-    id: 4,
-    name: "Phạm Thị D",
-    avatar: "/assets/avatar.jpg",
-    rating: 3,
-    content:
-      "Phòng hơi nhỏ so với mong đợi. Bữa sáng không đa dạng lắm. Được cái nhân viên nhiệt tình.",
-  },
-  {
-    id: 5,
-    name: "Hoàng Văn E",
-    avatar: "/assets/avatar.jpg",
-    rating: 4,
-    content:
-      "Khách sạn có thiết kế đẹp, hiện đại. Hồ bơi sạch sẽ. Sẽ giới thiệu cho bạn bè và người thân.",
-  },
-];
+import axios from "axios";
+import api from "@/services/api";
 
 const StarRating = ({ rating }) => (
   <div className="flex items-center">
@@ -58,19 +17,55 @@ const StarRating = ({ rating }) => (
   </div>
 );
 
-const ReviewView = () => {
+const ReviewView = ({ hotelId }) => {
+  const [allReviews, setAllReviews] = useState([]);
   const [selectedStar, setSelectedStar] = useState(null);
-  const [filteredReviews, setFilteredReviews] = useState(fakeReviews);
+  const [filteredReviews, setFilteredReviews] = useState([]);
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      if (!hotelId) return;
+      try {
+        const reviewsResponse = await api.get(`/reviews/hotel/${hotelId.id}`);
+        const reviewsData = reviewsResponse.data;
+        console.log(reviewsData);
+        
+        const reviewsWithGuestInfo = await Promise.all(
+          reviewsData.map(async (review) => {
+            try {
+              const guestResponse = await api.get(`/guests/user/${review.guestId}`);
+              const guestData = guestResponse.data;
+              return {
+                id: review.id,
+                name: guestData.fullName,
+                avatar: "/assets/avatar.jpg", // Giữ nguyên avatar theo yêu cầu
+                rating: review.rating,
+                content: review.comment,
+              };
+            } catch (error) {
+              console.error(`Không thể tải thông tin khách hàng ${review.guestId}`, error);
+              return { id: review.id, name: "Anonymous", avatar: "/assets/avatar.jpg", rating: review.rating, content: review.comment };
+            }
+          })
+        );
+        setAllReviews(reviewsWithGuestInfo);
+      } catch (error) {
+        console.error("Không thể tải danh sách đánh giá:", error);
+      }
+    };
+
+    fetchReviews();
+  }, [hotelId]);
 
   useEffect(() => {
     if (selectedStar === null) {
-      setFilteredReviews(fakeReviews);
+      setFilteredReviews(allReviews);
     } else {
       setFilteredReviews(
-        fakeReviews.filter((review) => review.rating === selectedStar)
+        allReviews.filter((review) => review.rating === selectedStar)
       );
     }
-  }, [selectedStar]);
+  }, [selectedStar, allReviews]);
 
   return (
     <div className="space-y-6 p-8 bg-white rounded-2xl shadow-">

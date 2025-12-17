@@ -1,6 +1,8 @@
+import { useAuth } from "@/context/AuthContext";
 import React from "react";
 
 const CustomerInfoStep = () => {
+  const {user} = useAuth();
   return (
     <div className="text-left space-y-6">
       <h3 className="text-xl font-bold text-gray-800">Thông tin của bạn</h3>
@@ -8,32 +10,34 @@ const CustomerInfoStep = () => {
         {/* Full Name */}
         <div>
           <label
-            htmlFor="firstName"
+            htmlFor="fullName"
             className="block text-sm font-medium text-gray-700 mb-1"
           >
-            Họ
+            Họ và tên
           </label>
           <input
             type="text"
-            id="firstName"
-            name="firstName"
+            id="fullName"
+            name="fullName"
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-cyan-500 focus:border-cyan-500"
-            placeholder=""
+            placeholder="Nguyễn Văn A"
+            defaultValue={user?.fullName || ""}
           />
         </div>
         <div>
           <label
-            htmlFor="lastName"
+            htmlFor="address"
             className="block text-sm font-medium text-gray-700 mb-1"
           >
-            Tên
+            Địa chỉ
           </label>
           <input
             type="text"
-            id="lastName"
-            name="lastName"
+            id="address"
+            name="address"
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-cyan-500 focus:border-cyan-500"
-            placeholder="Nguyễn Văn A"
+            placeholder="123 Đường ABC, Quận X, Thành phố Y"
+            defaultValue={user?.address || ""}
           />
         </div>
         {/* Email */}
@@ -50,6 +54,7 @@ const CustomerInfoStep = () => {
             name="email"
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-cyan-500 focus:border-cyan-500"
             placeholder="example@email.com"
+            defaultValue={user?.email || ""}
           />
         </div>
         {/* Phone Number */}
@@ -66,6 +71,7 @@ const CustomerInfoStep = () => {
             name="phone"
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-cyan-500 focus:border-cyan-500"
             placeholder="09xxxxxxxx"
+            defaultValue={user?.phoneNumber || ""}
           />
         </div>
       </div>

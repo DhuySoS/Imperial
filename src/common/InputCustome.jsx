@@ -9,6 +9,9 @@ const InputCustome = ({
   label,
   className,
   error,
+  name,
+  value,
+  onChange,
   ...props
 }) => {
   const [showPassword, setShowPassword] = React.useState(false);
@@ -21,6 +24,9 @@ const InputCustome = ({
         id={id}
         type={inputType}
         placeholder={placeholder}
+        name={name}
+        value={value}
+        onChange={onChange}
         {...props}
         className={`peer w-full  h-12 px-4 outline-none ${className}`}
       />

@@ -41,9 +41,9 @@ const FilterOptions = ({ onDataChange }) => {
   ];
   const floorOptions = [
     { label: "Tầng thấp (3-6)", value: "3-6", view: "Gần hồ, gần sảnh", extraFee: 0 , available : 1 },
-    { label: "Tầng trung (7-10)", value: "7-10", view: "Gần sảnh", extraFee: 250, available: 1},
-    { label: "Tầng cao (11-14)", value: "11-14", view: "Gần trung tâm", extraFee: 350, available: 1},
-    { label: "Tầng vip(15-20)", value: "15-20", view: "Gần trung tâm", extraFee: 500, available: 0},
+    { label: "Tầng trung (7-11)", value: "7-11", view: "Gần sảnh", extraFee: 250, available: 1},
+    { label: "Tầng cao (12-16)", value: "12-16", view: "View panorama 180 độ", extraFee: 350, available: 1},
+    { label: "Tầng vip(17-18)", value: "17-18", view: "View 360 độ, ban công riêng", extraFee: 500, available: 1},
   ];
   const [openMoreFloors, setOpenMoreFloors] = useState(false);
   const handleFilterChange = (key, val) =>

@@ -110,13 +110,7 @@ const BookingCard = ({ item }) => {
           Tổng tiền: <span>{item.totalPrice}</span>
         </p>
       </div>
-      <div className="flex flex-col justify-between">
-        <div className="flex items-center gap-2">
-          {currentStatu[0].icon}
-          <span>{currentStatu[0].title}</span>
-        </div>
-          <div className={`px-4 py-3 rounded-full ${item.isPaid ? "bg-green-400 text-white" : "bg-yellow-400 text-white"}`}>{item.paymentStatus}</div>
-      </div>
+      
     </div>
   );
 };

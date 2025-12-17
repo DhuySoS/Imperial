@@ -4,7 +4,7 @@ import { User, FileText, CheckCircle } from "lucide-react";
 const steps = [
   { id: 1, name: "Thông tin khách hàng", icon: <User /> },
   { id: 2, name: "Chi tiết thanh toán", icon: <FileText /> },
-  { id: 3, name: "Xác nhận đặt chỗ", icon: <CheckCircle /> },
+  { id: 3, name: "Xác nhận đặt phòng", icon: <CheckCircle /> },
 ];
 const progressWidths = [25, 75, 100];
 const PaymentStepper = ({ currentStep }) => {

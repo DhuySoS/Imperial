@@ -1,34 +1,28 @@
-import React from "react";
+import React, { use, useEffect, useState } from "react";
 import VoucherCard from "@/components/card/VoucherCard";
+import api from "@/services/api";
 
-const fakeVouchers = [
-  {
-    id: 1,
-    code: "IMPERIAL10",
-    title: "Giảm 10% cho đơn hàng từ 2.000.000 VNĐ",
-    expiry: "31/12/2025",
-  },
-  {
-    id: 2,
-    code: "HELLO2025",
-    title: "Giảm 100.000 VNĐ cho khách hàng mới",
-    expiry: "30/11/2025",
-  },
-  {
-    id: 3,
-    code: "FREESHIP",
-    title: "Miễn phí bữa sáng cho 2 người",
-    expiry: "15/12/2025",
-  },
-];
+
 
 const MyVouchers = () => {
+  const [vouchers, setVouchers] = useState([]);
+  useEffect(()=> {
+    const fetchVouchers = async () => {
+      try {
+        const response = await api.get("/discounts");
+        setVouchers(response.data);
+      } catch (error) {
+        console.log("Loi lay du lieu voucher:", error);
+      }
+    };
+    fetchVouchers();  
+  } , [])
   return (
     <div className="w-full max-w-4xl mx-auto py-8">
       <h1 className="text-3xl font-bold mb-8 text-gray-800">Voucher của bạn</h1>
       <div className="space-y-4">
-        {fakeVouchers.length > 0 ? (
-          fakeVouchers.map((voucher) => (
+        {vouchers.length > 0 ? (
+          vouchers.map((voucher) => (
             <VoucherCard key={voucher.id} voucher={voucher} />
           ))
         ) : (
